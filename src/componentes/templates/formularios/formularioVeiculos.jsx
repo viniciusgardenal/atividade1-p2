@@ -23,9 +23,9 @@ export default function FormVeiculos(props) {
     return (
 
 
-        <Form noValidate validated={validado} onSubmit={manipularSubmissao}>
+        <Form className='container col-8' noValidate validated={validado} onSubmit={manipularSubmissao}>
             <Row className="mb-3 mt-4">
-                <Form.Select className='mt-4'>
+                <Form.Select className='container mt-4'>
                     
                     <option>Marca:</option>
                     <option value="1">Citroën</option>
@@ -99,21 +99,6 @@ export default function FormVeiculos(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4'  as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Label>Username</Form.Label>
-                    <InputGroup hasValidation>
-                        <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                        <Form.Control
-                            type="text"
-                            placeholder="Username"
-                            aria-describedby="inputGroupPrepend"
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Please choose a username.
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} md="6" controlId="validationCustom03">
@@ -124,7 +109,7 @@ export default function FormVeiculos(props) {
                     </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="3" controlId="validationCustom04">
-                    <Form.Label>State</Form.Label>
+                    <Form.Label>Estado:</Form.Label>
                     <Form.Control type="text" placeholder="Estado" required />
                     <Form.Control.Feedback type="invalid">
                         Por favor, digite um estado válido.
@@ -138,15 +123,7 @@ export default function FormVeiculos(props) {
                     </Form.Control.Feedback>
                 </Form.Group>
             </Row>
-            <Form.Group className="mb-3">
-                <Form.Check
-                    required
-                    label="Agree to terms and conditions"
-                    feedback="You must agree before submitting."
-                    feedbackType="invalid"
-                />
-            </Form.Group>
-            <Button type="submit">Gravar</Button>
+            <Button type="submit">Cadastrar</Button>
         </Form>
 
 
