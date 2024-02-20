@@ -24,28 +24,24 @@ export default function FormVeiculos(props) {
 
 
         <Form className='container col-8' noValidate validated={validado} onSubmit={manipularSubmissao}>
-            <Row className="mb-3 mt-4">
-                <Form.Select className='container mt-4'>
-                    
-                    <option>Marca:</option>
-                    <option value="1">Citroën</option>
-                    <option value="2">Chevrolet</option>
-                    <option value="3">Fiat</option>
-                    <option value="4">Honda</option>
-                    <option value="5">Hyundai</option>
-                    <option value="6">Nissan</option>
-                    <option value="7">Peugeot</option>
-                    <option value="8">Renault</option>
-                    <option value="9">Toyota</option>
-                    <option value="10">Volkswagen</option>
-                </Form.Select>
-                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
-                    <Form.Label>Modelo</Form.Label>
+            <Row className="">
+            <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
+                    <Form.Label>Marca:</Form.Label>
                     <Form.Control
                         required
                         type="text"
-                        placeholder="modelo"
-                        defaultValue="C3"
+                        placeholder="Audi"
+                        defaultValue=""
+                    />
+                    <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
+                    <Form.Label>Modelo:</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="ABC"
+                        defaultValue=""
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
@@ -55,7 +51,7 @@ export default function FormVeiculos(props) {
                         required
                         type="text"
                         placeholder="Placa"
-                        defaultValue="BEE 4R22"
+                        defaultValue=""
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
@@ -65,7 +61,7 @@ export default function FormVeiculos(props) {
                         required
                         type="text"
                         placeholder="Ano"
-                        defaultValue="2023"
+                        defaultValue=""
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
@@ -75,7 +71,7 @@ export default function FormVeiculos(props) {
                         required
                         type="text"
                         placeholder="Cor"
-                        defaultValue="Prata"
+                        defaultValue=""
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
@@ -100,7 +96,7 @@ export default function FormVeiculos(props) {
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
-            <Row className="mb-3">
+            <Row className="mb-3 mt-4">
                 <Form.Group as={Col} md="6" controlId="validationCustom03">
                     <Form.Label>Cidade:</Form.Label>
                     <Form.Control type="text" placeholder="Cidade" required />
@@ -119,7 +115,7 @@ export default function FormVeiculos(props) {
                     <Form.Label>CEP:</Form.Label>
                     <Form.Control type="text" placeholder="00000-000" required />
                     <Form.Control.Feedback type="invalid">
-                        Por favor, digite cum CEP válido.
+                        Por favor, digite um CEP válido.
                     </Form.Control.Feedback>
                 </Form.Group>
             </Row>
