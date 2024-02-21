@@ -4,8 +4,8 @@ import Menu from "./menu";
 
 export default function Pagina(props) {
     return (
-        <div>
-            <Cabecalho texto="Sistema de Cadastro de Veículos"/>
+        <div className="margin">
+            <Cabecalho texto="Descubra Seminovos"/>
             <Menu/>
             <div className="container">
                 {props.children}

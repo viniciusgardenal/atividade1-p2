@@ -9,8 +9,8 @@ export default function Menu(props) {
                     <Container>
                         <Navbar.Brand href="#home">
                             <img
-                                alt=""
-                                src="./assets/sedan.png"
+                                alt="car"
+                                src="/assets/sedan.png"
                                 width="30"
                                 height="30"
                                 className="d-inline-block align-top"

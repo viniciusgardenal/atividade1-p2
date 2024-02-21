@@ -25,8 +25,8 @@ export default function FormVeiculos(props) {
 
         <Form className='container col-8' noValidate validated={validado} onSubmit={manipularSubmissao}>
             <Row className="">
-            <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
-                    <Form.Label>Marca:</Form.Label>
+                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
+                    <Form.Label>Fabricante:</Form.Label>
                     <Form.Control
                         required
                         type="text"
@@ -75,7 +75,7 @@ export default function FormVeiculos(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4'  as={Col} md="4" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Chassi:</Form.Label>
                     <Form.Control
                         required
@@ -85,7 +85,7 @@ export default function FormVeiculos(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4'  as={Col} md="4" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Renavam:</Form.Label>
                     <Form.Control
                         required
@@ -95,6 +95,38 @@ export default function FormVeiculos(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
+                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
+                    <Form.Label>Quilometragem:</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="00000000000"
+                        defaultValue=""
+                    />
+                    <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
+                    <Form.Label>O Veículo é:</Form.Label>
+                   {['radio'].map((type) => (
+                    <div  className="">
+                        <Form.Check
+                            inline
+                            label="Novo"
+                            name="group1"
+                            type={type}
+                            id={`inline-${type}-1`}
+                        />
+                        <Form.Check
+                            inline
+                            label="Usado"
+                            name="group1"
+                            type={type}
+                            id={`inline-${type}-2`}
+                        />
+                    </div>
+                ))} 
+                </Form.Group>
+                
             </Row>
             <Row className="mb-3 mt-4">
                 <Form.Group as={Col} md="6" controlId="validationCustom03">
