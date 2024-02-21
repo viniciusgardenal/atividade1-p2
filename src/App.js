@@ -1,4 +1,4 @@
-import TelaCadastroVeiculos from "./componentes/templates/telas/telaCadastroVeiculos";
+import TelaCadastroVeiculos from "./componentes/telas/telaCadastroVeiculos";
 
 function App() {
   return (

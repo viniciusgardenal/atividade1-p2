@@ -1,4 +1,4 @@
-import Pagina from "../pagina";
+import Pagina from "../templates/pagina";
 import FormVeiculos from "../formularios/formularioVeiculos";
 export default function TelaCadastroVeiculos(props) {
     return (
