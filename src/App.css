@@ -1,8 +1,12 @@
 body, html{
     margin: 0 auto;
+    padding: 0;
     width: 100%;
 }
-
+.margin {
+    margin: 0 auto;
+    margin-top: 0;
+}
 
 .btn-select{
     margin: 0 auto;

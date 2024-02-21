@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 export default function FormVeiculos(props) {
     const [validado, setValidado] = useState(false);
@@ -151,7 +150,11 @@ export default function FormVeiculos(props) {
                     </Form.Control.Feedback>
                 </Form.Group>
             </Row>
-            <Button type="submit">Cadastrar</Button>
+            <div className='d-flex justify-content-around'>
+                <Button  type="submit">Cadastrar</Button>
+                <Button className='btn-danger'  type="reset">Limpar</Button>
+            </div>
+            
         </Form>
 
 
