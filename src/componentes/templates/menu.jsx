@@ -7,12 +7,12 @@ export default function Menu(props) {
     return (
         <Navbar expand="lg" className="bg-body-secondary">
       <Container>
-        <Navbar.Brand className='' href="#home">Cadastramento</Navbar.Brand>
+        <Navbar.Brand href="/">Cadastramento</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#carros">Carros</Nav.Link>
-            <Nav.Link href="#motos">Motos</Nav.Link>
+            <Nav.Link href="/carros">Carros</Nav.Link>
+            <Nav.Link href="/usuarios">Usuários</Nav.Link>
             <NavDropdown title="Filtros" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">País</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -23,6 +23,9 @@ export default function Menu(props) {
                 Sair para o marketplace
               </NavDropdown.Item>
             </NavDropdown>
+          </Nav>
+          <Nav>
+            <Navbar.Brand href="/login">Login</Navbar.Brand>
           </Nav>
         </Navbar.Collapse>
       </Container>

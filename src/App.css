@@ -1,3 +1,10 @@
+.h2s {
+    font-weight: bold;
+    color: #78DE1F;
+}
+.h2 {
+    color: #198754;
+}
 body, html{
     margin: 0 auto;
     padding: 0;
@@ -25,4 +32,14 @@ body, html{
     font-weight: bold;
     color: #000;
     text-align: center;
+}
+
+.card{
+    background-color: #E9ECEF;
+    margin: 0 auto;
+    border: 2px solid #198754;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px 0px #31455d;
 }
