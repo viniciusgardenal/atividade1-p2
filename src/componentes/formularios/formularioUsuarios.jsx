@@ -8,7 +8,21 @@ import Row from 'react-bootstrap/Row';
 
 export default function FormUsuarios(props) {
     const [validado, setValidado] = useState(false);
+    const [usuario, setUsuario] = useState({
+        nome: '',
+        sobrenome: '',
+        genero: '',
+        cpf: '',
+        dataNascimento: '',
+        cep: '',
+        cidade: '',
+        estado: ''
+    });
 
+    function manipularMudanca(evento) {
+        const componente = evento.currentTarget;
+        setUsuario({...usuario, [componente.name]: componente.value});
+    }
     function manipularSubmissao(evento) {
         evento.preventDefault();
         evento.stopPropagation();
@@ -16,14 +30,14 @@ export default function FormUsuarios(props) {
         if (form.checkValidity() === false) {
             setValidado(true);
         }
-        else {
+        else { 
             setValidado(false);
+            props.setListaDeUsuarios([...props.listaDeUsuarios, usuario]);
+            props.setExibirTabela(true);
+           
         }
-        setValidado(true);
     }
     return (
-
-
         <Form className='container col-8' noValidate validated={validado} onSubmit={manipularSubmissao}>
             <Row className="">
                 <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom01">
@@ -32,7 +46,10 @@ export default function FormUsuarios(props) {
                         required
                         type="text"
                         placeholder=""
-                        defaultValue=""
+                        id='nome'
+                        name='nome'
+                        value={usuario.nome}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
@@ -42,19 +59,24 @@ export default function FormUsuarios(props) {
                         required
                         type="text"
                         placeholder=""
-                        defaultValue=""
+                        id='sobrenome'
+                        name='sobrenome'
+                        value={usuario.sobrenome}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
                     <Form.Label>Gênero:</Form.Label>
-                    <Form.Select aria-label="Default select example">
-                        <option>Selecione: </option>
-                        <option value="1">Feminino</option>
-                        <option value="2">Masculino</option>
-                        <option value="3">Outro</option>
-                        
-                    </Form.Select>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Gênero"
+                        id='genero'
+                        name='genero'
+                        value={usuario.genero}
+                        onChange={manipularMudanca}
+                    />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
@@ -63,7 +85,10 @@ export default function FormUsuarios(props) {
                         required
                         type="number"
                         placeholder="XXX.XXX.XXX-XX"
-                        defaultValue=""
+                        id='cpf'
+                        name='cpf'
+                        value={usuario.cpf}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
@@ -73,7 +98,10 @@ export default function FormUsuarios(props) {
                         required
                         type="date"
                         placeholder=""
-                        defaultValue=""
+                        id='dataNascimento'
+                        name='dataNascimento'
+                        value={usuario.dataNascimento}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
@@ -83,7 +111,10 @@ export default function FormUsuarios(props) {
                         required
                         type="text"
                         placeholder="CEP"
-                        defaultValue=""
+                        id='cep'
+                        name='cep'
+                        value={usuario.cep}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
@@ -93,42 +124,24 @@ export default function FormUsuarios(props) {
                         required
                         type="text"
                         placeholder="Cidade"
-                        defaultValue=""
+                        id='cidade'
+                        name='cidade'
+                        value={usuario.cidade}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Estado:</Form.Label>
-                    <Form.Select aria-label="Default select example">
-                        <option>Selecione: </option>
-                        <option value="1">Acre</option>
-                        <option value="2">Alagoas</option>
-                        <option value="3">Amapá</option>
-                        <option value="4">Amazonas</option>
-                        <option value="5">Bahia</option>
-                        <option value="6">Ceará</option>
-                        <option value="7">Espiríto Santo</option>
-                        <option value="8">Goiás</option>
-                        <option value="9">Maranhão</option>
-                        <option value="10">Mato Grosso</option>
-                        <option value="11">Mato Grosso do Sul</option>
-                        <option value="12">Minas Gerais</option>
-                        <option value="13">Pará</option>
-                        <option value="14">Paraíba</option>
-                        <option value="15">Paraná</option>
-                        <option value="16">Pernambuco</option>
-                        <option value="17">Piauí</option>
-                        <option value="18">Rio de Janeiro</option>
-                        <option value="19">Rio Grande do Norte</option>
-                        <option value="20">Rio Grande do Sul</option>
-                        <option value="21">Rondônia</option>
-                        <option value="22">Roraima</option>
-                        <option value="23">Santa Catarina</option>
-                        <option value="24">São Paulo</option>
-                        <option value="25">Sergipe</option>
-                        <option value="26">Tocantis</option>
-                        <option value="27">Distrito Federal</option>
-                    </Form.Select>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Estado"
+                        id='estado'
+                        name='estado'
+                        value={usuario.estado}
+                        onChange={manipularMudanca}
+                    />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom02">
@@ -137,7 +150,10 @@ export default function FormUsuarios(props) {
                         required
                         type="email"
                         placeholder="email@email.com"
-                        defaultValue=""
+                        id='email'
+                        name='email'
+                        value={usuario.email}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
@@ -147,7 +163,10 @@ export default function FormUsuarios(props) {
                         required
                         type="email"
                         placeholder="email@email.com"
-                        defaultValue=""
+                        id='confirmeEmail'
+                        name='confirmeEmail'
+                        value={usuario.confirmeEmail}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
@@ -157,7 +176,10 @@ export default function FormUsuarios(props) {
                         required
                         type="password"
                         placeholder="******"
-                        defaultValue=""
+                        id='senha'
+                        name='senha'
+                        value={usuario.senha}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
@@ -167,15 +189,21 @@ export default function FormUsuarios(props) {
                         required
                         type="password"
                         placeholder="******"
-                        defaultValue=""
+                        id='confirmeSenha'
+                        name='confirmeSenha'
+                        value={usuario.confirmeSenha}
+                        onChange={manipularMudanca}
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
             
             <div className='d-flex mt-4 justify-content-around'>
-                <Button  type="submit">Cadastrar</Button>
+                <Button className="btn-success" type="submit">Cadastrar</Button>
                 <Button className='btn-danger'  type="reset">Limpar</Button>
+                <Button onClick={() => {
+                    props.setExibirTabela(true)
+                }}>Voltar</Button>
             </div>
             
         </Form>
