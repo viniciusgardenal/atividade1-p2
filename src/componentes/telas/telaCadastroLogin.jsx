@@ -1,20 +1,21 @@
 import Pagina from "../templates/pagina";
 import FormLogin from "../formularios/formularioLogin";
-import { useContext, useState } from "react";
-import contextoUsuario from "../contextos/contextoUsuario.jsx";
+import {useContext} from "react";
+import { useState } from "react";
+import contextoUsuario from "../contextos/contextoUsuario";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import React from "react";
 
 export default function TelaCadastroLogin(props) {
     const [usuario, setUsuario] = useContext(contextoUsuario);
-    const [email, setEmail] = useState('');
+    const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
-    // const [validado, setValidado] = useState(false);
     function verificarCredenciais() {
-        if (email === 'admin' && senha === 'admin') {
+        if (nome === 'admin' && senha === 'admin') {
             setUsuario({
-                email: 'email',
+                nome: '',
                 logado: true
             });
         }
@@ -24,16 +25,16 @@ export default function TelaCadastroLogin(props) {
             <Pagina>
                 <h2 className="title-form mt-4"><span className="h2">Bem-vindo.</span></h2>
                 <Form className='container col-md-5 card mt-4' noValidate >
-                    <Row className="">
+                    <Row>
                         <Form.Group className='mt-4' controlId="validationCustom02">
-                            <Form.Label>E-mail:</Form.Label>
+                            <Form.Label>Usuário:</Form.Label>
                             <Form.Control
                                 required
-                                type="email"
-                                value={email}
-                                placeholder="email@email.com"
-                                id='email'
-                                onChange={(e) => setEmail(e.target.value)}
+                                type="text"
+                                value={nome}
+                                placeholder="nome de usuário"
+                                id='nome'
+                                onChange={(e) => setNome(e.target.value)}
                             />
                             <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                         </Form.Group>

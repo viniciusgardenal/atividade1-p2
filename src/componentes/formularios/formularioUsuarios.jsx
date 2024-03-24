@@ -1,14 +1,12 @@
-
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-
 export default function FormUsuarios(props) {
     const [validado, setValidado] = useState(false);
-    const [usuario, setUsuario] = useState({
+    const [usuario, setUsuario] = useState(props.modoEdicao? props.usuarioSelecionado : {
         nome: '',
         sobrenome: '',
         genero: '',
@@ -32,15 +30,28 @@ export default function FormUsuarios(props) {
         }
         else { 
             setValidado(false);
-            props.setListaDeUsuarios([...props.listaDeUsuarios, usuario]);  // Atualiza o estado com a nova lista
+            
+            if (!props.modoEdicao) {
+                props.setListaDeUsuarios([...props.listaDeUsuarios, usuario]);
+                props.setExibirTabela(true);
+            }
+            else {
+                const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
+                let novaLista = [...props.listaDeUsuarios];
+                novaLista = posicao = usuario;
+                props.setListaDeUsuarios(novaLista);
+                    
+                }
+            }
             props.setExibirTabela(true);
            
         }
-    }
+    
+
     return (
         <Form className='container col-8' noValidate validated={validado} onSubmit={manipularSubmissao}>
             <Row className="">
-                <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom01">
+                <Form.Group className='mt-4' as={Col} md="6">
                     <Form.Label>Primeiro Nome:</Form.Label>
                     <Form.Control
                         required
@@ -53,7 +64,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom01">
+                <Form.Group className='mt-4' as={Col} md="6">
                     <Form.Label>Sobrenome:</Form.Label>
                     <Form.Control
                         required
@@ -66,7 +77,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
+                <Form.Group className='mt-4' as={Col} md="4">
                     <Form.Label>Gênero:</Form.Label>
                     <Form.Control
                         required
@@ -79,7 +90,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
+                <Form.Group className='mt-4' as={Col} md="4">
                     <Form.Label>CPF:</Form.Label>
                     <Form.Control
                         required
@@ -92,7 +103,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom01">
+                <Form.Group className='mt-4' as={Col} md="4">
                     <Form.Label>Data de Nascimento:</Form.Label>
                     <Form.Control
                         required
@@ -105,7 +116,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação.</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="4" >
                     <Form.Label>CEP:</Form.Label>
                     <Form.Control
                         required
@@ -118,7 +129,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="4">
                     <Form.Label>Cidade:</Form.Label>
                     <Form.Control
                         required
@@ -131,7 +142,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="4" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="4">
                     <Form.Label>Estado:</Form.Label>
                     <Form.Control
                         required
@@ -144,7 +155,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="6">
                     <Form.Label>E-mail:</Form.Label>
                     <Form.Control
                         required
@@ -157,7 +168,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="6">
                     <Form.Label>Confirme seu e-mail:</Form.Label>
                     <Form.Control
                         required
@@ -170,7 +181,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="6">
                     <Form.Label>Senha:</Form.Label>
                     <Form.Control
                         required
@@ -183,7 +194,7 @@ export default function FormUsuarios(props) {
                     />
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className='mt-4' as={Col} md="6" controlId="validationCustom02">
+                <Form.Group className='mt-4' as={Col} md="6">
                     <Form.Label>Confirme sua senha:</Form.Label>
                     <Form.Control
                         required
@@ -199,10 +210,11 @@ export default function FormUsuarios(props) {
             </Row>
             
             <div className='d-flex mt-4 justify-content-around'>
-                <Button className="btn-success" type="submit">Cadastrar</Button>
+                <Button className="btn-success" type="submit">{props.modoEdicao? "Editar" : "Cadastrar"}</Button>
                 <Button className='btn-danger'  type="reset">Limpar</Button>
                 <Button onClick={() => {
-                    props.setExibirTabela(true)
+                    props.setModoEdicao(false);
+                    props.setExibirTabela(true);
                 }}>Voltar</Button>
             </div>
             

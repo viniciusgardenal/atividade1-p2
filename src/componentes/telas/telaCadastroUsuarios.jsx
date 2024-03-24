@@ -5,12 +5,18 @@ import React, { useState } from 'react';
 export default function TelaCadastroUsuarios(props) {
     const [exibirTabela, setExibirTabela] = useState(true);
     const [listaDeUsuarios, setListaDeUsuarios] = useState([]);
+    const [usuarioSelecionado, setUsuarioSelecionado] = useState({});
+    const [modoEdicao, setModoEdicao] = useState(false);
     if (exibirTabela) {
         return (
             <div>
                 <Pagina>
                     <h1>Lista de Usuários</h1>
-                    <TabelaUsuarios listaDeUsuarios={listaDeUsuarios} setExibirTabela={setExibirTabela}/>
+                    <TabelaUsuarios listaDeUsuarios={listaDeUsuarios} 
+                    setExibirTabela={setExibirTabela}
+                    setListaDeUsuarios={setListaDeUsuarios}
+                    setUsuarioSelecionado={setUsuarioSelecionado}
+                    setModoEdicao={setModoEdicao}/>
                 </Pagina>
             </div>   
         )
@@ -27,7 +33,10 @@ export default function TelaCadastroUsuarios(props) {
                     <FormUsuarios 
                     setExibirTabela={setExibirTabela}
                     listaDeUsuarios={listaDeUsuarios}
-                    setListaDeUsuarios={setListaDeUsuarios}/>
+                    setListaDeUsuarios={setListaDeUsuarios}
+                    usuarioSelecionado={usuarioSelecionado}
+                    setModoEdicao={setModoEdicao}
+                    modoEdicao={modoEdicao}/>
                 </Pagina>
             </div>
         )
