@@ -38,7 +38,7 @@ export default function FormUsuarios(props) {
             else {
                 const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
                 let novaLista = [...props.listaDeUsuarios];
-                novaLista = posicao = usuario;
+                novaLista[posicao]  = usuario;
                 props.setListaDeUsuarios(novaLista);
                     
                 }
