@@ -3,7 +3,7 @@ export default function TabelaUsuarios(props) {
     return (
         <div className="container col-8">
             <h2>Usuários</h2>
-            <Table striped bordered hover >
+            <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>#</th>
