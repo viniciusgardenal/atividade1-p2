@@ -10,7 +10,7 @@ export default function TelaCadastroUsuarios(props) {
             <div>
                 <Pagina>
                     <h1>Lista de Usuários</h1>
-                    <TabelaUsuarios listaDeUsuarios={[listaDeUsuarios]} setExibirTabela={setExibirTabela}/>
+                    <TabelaUsuarios listaDeUsuarios={listaDeUsuarios} setExibirTabela={setExibirTabela}/>
                 </Pagina>
             </div>   
         )

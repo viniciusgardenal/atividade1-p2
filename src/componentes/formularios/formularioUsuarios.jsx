@@ -32,7 +32,7 @@ export default function FormUsuarios(props) {
         }
         else { 
             setValidado(false);
-            props.setListaDeUsuarios(...props.listaDeUsuarios, usuario);  // Atualiza o estado com a nova lista
+            props.setListaDeUsuarios([...props.listaDeUsuarios, usuario]);  // Atualiza o estado com a nova lista
             props.setExibirTabela(true);
            
         }
