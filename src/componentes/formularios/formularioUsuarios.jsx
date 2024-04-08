@@ -19,22 +19,16 @@ export default function FormUsuarios(props) {
         estado: ''
     });
 
-    function enviarUsuarioBackend() {
-        fetch(urlBaseUsuarios, {
+    async function enviarUsuarioBackend() {
+        const resposta = await fetch(urlBaseUsuarios, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(usuario),
-        })
-            .then(resposta => resposta.json())
-            .then(resposta => {
-                alert(resposta.mensagem);
-            })
-            .catch(erro => {
-                alert('Não foi possível estabelecer uma comunicação com backend.' + erro.message);
-                return false;
-            })
+        });
+        const dados = await resposta.json();
+        return dados;
     }
 
     function manipularMudanca(evento) {
@@ -52,11 +46,17 @@ export default function FormUsuarios(props) {
             setValidado(false);
 
             if (!props.modoEdicao) {
-                if (enviarUsuarioBackend()) {
-                    props.setListaDeUsuarios([...props.listaDeUsuarios, usuario]);
-                    props.setExibirTabela(true);
-                }
-
+                enviarUsuarioBackend().then((dados) => {
+                    if (dados.status) {
+                        props.setListaDeUsuarios([...props.listaDeUsuarios, dados]);
+                        props.setExibirTabela(true);
+                    }
+                    alert(dados.mensagem);
+                }) 
+                .catch((erro) => {
+                    alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
+                })
+                
             }
             else {
                 const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
