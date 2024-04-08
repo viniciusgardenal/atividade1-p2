@@ -1,12 +1,19 @@
 import Pagina from "../templates/pagina";
 import FormUsuarios from "../formularios/formularioUsuarios";
 import TabelaUsuarios from "../tabelas/TabelaUsuarios";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import urlBaseUsuarios from '../utilitarios/config';
 export default function TelaCadastroUsuarios(props) {
     const [exibirTabela, setExibirTabela] = useState(true);
     const [listaDeUsuarios, setListaDeUsuarios] = useState([]);
     const [usuarioSelecionado, setUsuarioSelecionado] = useState({});
     const [modoEdicao, setModoEdicao] = useState(false);
+
+    useEffect(() => {
+        fetch(urlBaseUsuarios,{method: "GET"})
+        .then(resposta => resposta.json())
+        .then(usuarios => setListaDeUsuarios(usuarios))
+    }, [])
     if (exibirTabela) {
         return (
             <div>

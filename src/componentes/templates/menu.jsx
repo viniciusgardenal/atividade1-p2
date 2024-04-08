@@ -13,16 +13,16 @@ export default function Menu(props) {
     <Navbar expand="lg" className="bg-body-secondary">
       <Container>
         <Navbar.Brand>
-          <Nav.Link className='text-decoration' to={"/"}>Cadastramento</Nav.Link>
+          <Link className='text-decoration' to={"/"}>Cadastramento</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavbarBrand>
-              <Nav.Link className='text-decoration' to={"/carros"}>Carros</Nav.Link>
+              <Link className='text-decoration' to={"/carros"}>Carros</Link>
             </NavbarBrand>
             <NavbarBrand>
-              <Nav.Link className='text-decoration' to={"/usuarios"}>Usuários</Nav.Link>
+              <Link className='text-decoration' to={"/usuarios"}>Usuários</Link>
             </NavbarBrand> 
           </Nav>
           <Nav>

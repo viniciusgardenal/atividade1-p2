@@ -3,10 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import urlBaseUsuarios from '../utilitarios/config';
 
 export default function FormUsuarios(props) {
+
     const [validado, setValidado] = useState(false);
-    const [usuario, setUsuario] = useState(props.modoEdicao? props.usuarioSelecionado : {
+    const [usuario, setUsuario] = useState(props.modoEdicao ? props.usuarioSelecionado : {
         nome: '',
         sobrenome: '',
         genero: '',
@@ -17,9 +19,33 @@ export default function FormUsuarios(props) {
         estado: ''
     });
 
+    async function enviarUsuarioBackend() {
+        const resposta = await fetch(urlBaseUsuarios, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuario),
+        })
+        const dados = await resposta.json();
+        return dados;
+    }
+
+    async function alterarUsuarioBackend() {
+        const resposta = await fetch(urlBaseUsuarios, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuario),
+        })
+        const dados = await resposta.json();
+        return dados;
+    }
+
     function manipularMudanca(evento) {
         const componente = evento.currentTarget;
-        setUsuario({...usuario, [componente.name]: componente.value});
+        setUsuario({ ...usuario, [componente.name]: componente.value });
     }
     function manipularSubmissao(evento) {
         evento.preventDefault();
@@ -28,25 +54,45 @@ export default function FormUsuarios(props) {
         if (form.checkValidity() === false) {
             setValidado(true);
         }
-        else { 
+        else {
             setValidado(false);
-            
+
             if (!props.modoEdicao) {
-                props.setListaDeUsuarios([...props.listaDeUsuarios, usuario]);
-                props.setExibirTabela(true);
+                enviarUsuarioBackend().then((dados) => {
+                    if (dados.status) {
+                        props.setListaDeUsuarios([...props.listaDeUsuarios, dados.dados]);
+                        props.setExibirTabela(true);
+                    }
+                    else {
+                        alert(dados.mensagem)
+                    }
+                })
+                .catch((erro) => {
+                    alert('Não foi possível conectar ao Backend. Erro: ' + erro)
+                }) 
+
             }
             else {
-                const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
-                let novaLista = [...props.listaDeUsuarios];
-                novaLista[posicao]  = usuario;
-                props.setListaDeUsuarios(novaLista);
+                alterarUsuarioBackend().then((dados) => {
+                    alert(dados.mensagem)
+                    if (dados.status) {
+                        const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
+                        let novaLista = [...props.listaDeUsuarios];
+                        novaLista[posicao] = usuario;
+                        props.setListaDeUsuarios(novaLista);
+                        props.setExibirTabela(true);
+                    }
                     
-                }
+                })
+                .catch((erro) => {
+                    alert('Não foi possível conectar ao Backend. Erro: ' + erro)
+                })
             }
-            props.setExibirTabela(true);
-           
         }
-    
+        props.setExibirTabela(true);
+
+    }
+
 
     return (
         <Form className='container col-8' noValidate validated={validado} onSubmit={manipularSubmissao}>
@@ -208,16 +254,16 @@ export default function FormUsuarios(props) {
                     <Form.Control.Feedback type='invalid'>Preencha a informação!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
-            
+
             <div className='d-flex mt-4 justify-content-around'>
-                <Button className="btn-success" type="submit">{props.modoEdicao? "Editar" : "Cadastrar"}</Button>
-                <Button className='btn-danger'  type="reset">Limpar</Button>
+                <Button className="btn-success" type="submit">{props.modoEdicao ? "Editar" : "Cadastrar"}</Button>
+                <Button className='btn-danger' type="reset">Limpar</Button>
                 <Button onClick={() => {
                     props.setModoEdicao(false);
                     props.setExibirTabela(true);
                 }}>Voltar</Button>
             </div>
-            
+
         </Form>
 
 
