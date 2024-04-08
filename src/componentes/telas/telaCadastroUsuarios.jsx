@@ -14,6 +14,7 @@ export default function TelaCadastroUsuarios(props) {
         .then(resposta => resposta.json())
         .then(usuarios => setListaDeUsuarios)
     }, [])
+    
     if (exibirTabela) {
         return (
             <div>
