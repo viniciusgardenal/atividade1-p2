@@ -3,11 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-<<<<<<< HEAD
 import urlBaseUsuarios from '../utilitarios/config';
-=======
-import urlBaseUsuarios from '../../utilitarios/urlBaseUsuarios';
->>>>>>> 95a1e069e60eb6de4ce284c58e2702191728bb7b
 
 export default function FormUsuarios(props) {
 
