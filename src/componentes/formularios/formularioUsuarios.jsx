@@ -18,9 +18,7 @@ export default function FormUsuarios(props) {
         cidade: '',
         estado: ''
     });
-
-    async function enviarUsuarioBackend() {
-        const resposta = await fetch(urlBaseUsuarios, {
+    
     async function enviarUsuarioBackend() {
         const resposta = await fetch(urlBaseUsuarios, {
             method: 'POST',
