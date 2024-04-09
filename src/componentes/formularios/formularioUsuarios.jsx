@@ -21,6 +21,8 @@ export default function FormUsuarios(props) {
 
     async function enviarUsuarioBackend() {
         const resposta = await fetch(urlBaseUsuarios, {
+    async function enviarUsuarioBackend() {
+        const resposta = await fetch(urlBaseUsuarios, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
