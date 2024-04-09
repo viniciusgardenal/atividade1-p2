@@ -22,15 +22,18 @@ function App() {
   }
   else {
     return (
-      <contextoUsuario.Provider value={[usuario, setUsuario]}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/usuarios" element={<TelaCadastroUsuarios />} />
-            <Route path="/carros" element={<TelaCadastroVeiculos />} />
-            <Route path="*" element={<TelaMenu />} />
-          </Routes>
-        </BrowserRouter>
-      </contextoUsuario.Provider>
+      <div className='App'>
+        <contextoUsuario.Provider value={[usuario, setUsuario]}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/usuarios" element={<TelaCadastroUsuarios />} />
+              <Route path="/carros" element={<TelaCadastroVeiculos />} />
+              <Route path="*" element={<TelaMenu />} />
+            </Routes>
+          </BrowserRouter>
+        </contextoUsuario.Provider>
+      </div>
+
     );
   }
 }

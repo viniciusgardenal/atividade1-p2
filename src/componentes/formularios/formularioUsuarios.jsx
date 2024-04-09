@@ -26,7 +26,7 @@ export default function FormUsuarios(props) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(usuario),
-        })
+        });
         const dados = await resposta.json();
         return dados;
     }
@@ -38,7 +38,7 @@ export default function FormUsuarios(props) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(usuario),
-        })
+        });
         const dados = await resposta.json();
         return dados;
     }
@@ -60,37 +60,32 @@ export default function FormUsuarios(props) {
             if (!props.modoEdicao) {
                 enviarUsuarioBackend().then((dados) => {
                     if (dados.status) {
-                        props.setListaDeUsuarios([...props.listaDeUsuarios, dados.dados]);
+                        props.setListaDeUsuarios([...props.listaDeUsuarios, dados]);
                         props.setExibirTabela(true);
                     }
-                    else {
-                        alert(dados.mensagem)
-                    }
-                })
-                .catch((erro) => {
-                    alert('Não foi possível conectar ao Backend. Erro: ' + erro)
+                    alert(dados.mensagem);
                 }) 
-
+                .catch((erro) => {
+                    alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
+                })
             }
             else {
                 alterarUsuarioBackend().then((dados) => {
-                    alert(dados.mensagem)
+                    alert(dados.mensagem);
                     if (dados.status) {
                         const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
                         let novaLista = [...props.listaDeUsuarios];
                         novaLista[posicao] = usuario;
                         props.setListaDeUsuarios(novaLista);
                         props.setExibirTabela(true);
-                    }
+                    } 
                     
                 })
                 .catch((erro) => {
-                    alert('Não foi possível conectar ao Backend. Erro: ' + erro)
+                    alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
                 })
             }
         }
-        props.setExibirTabela(true);
-
     }
 
 
