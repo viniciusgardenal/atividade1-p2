@@ -6,13 +6,12 @@ import Row from 'react-bootstrap/Row';
 import urlBaseUsuarios from '../utilitarios/config';
 
 export default function FormUsuarios(props) {
-
     const [validado, setValidado] = useState(false);
     const [usuario, setUsuario] = useState(props.modoEdicao ? props.usuarioSelecionado : {
+        cpf: '',
         nome: '',
         sobrenome: '',
         genero: '',
-        cpf: '',
         dataNascimento: '',
         cep: '',
         cidade: '',
@@ -51,42 +50,41 @@ export default function FormUsuarios(props) {
         evento.preventDefault();
         evento.stopPropagation();
         const form = evento.currentTarget;
+    
         if (form.checkValidity() === false) {
-            setValidado(true);
+          setValidado(true);
+          return;
         }
+    
+        if (!props.modoEdicao) {
+          enviarUsuarioBackend().then((dados) => {
+            if (dados.status) {
+              props.setListaDeUsuarios([...props.listaDeUsuarios, usuario]);
+              props.setExibirTabela(true);
+            }
+            alert(dados.mensagem);
+          })
+          .catch((erro) => {
+            alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
+          });
+        } 
         else {
-            setValidado(false);
-
-            if (!props.modoEdicao) {
-                enviarUsuarioBackend().then((dados) => {
-                    if (dados.status) {
-                        props.setListaDeUsuarios([...props.listaDeUsuarios, dados]);
-                        props.setExibirTabela(true);
-                    }
-                    alert(dados.mensagem);
-                }) 
-                .catch((erro) => {
-                    alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
-                })
+          alterarUsuarioBackend().then((dados) => {
+            alert(dados.mensagem);
+            if (dados.status) {
+              const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
+              let novaLista = [...props.listaDeUsuarios];
+              novaLista[posicao] = usuario;
+              props.setListaDeUsuarios(novaLista);
+              props.setExibirTabela(true);
+              
             }
-            else {
-                alterarUsuarioBackend().then((dados) => {
-                    alert(dados.mensagem);
-                    if (dados.status) {
-                        const posicao = props.listaDeUsuarios.map(usuario => usuario.cpf).indexOf(props.usuarioSelecionado.cpf);
-                        let novaLista = [...props.listaDeUsuarios];
-                        novaLista[posicao] = usuario;
-                        props.setListaDeUsuarios(novaLista);
-                        props.setExibirTabela(true);
-                    } 
-                    
-                })
-                .catch((erro) => {
-                    alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
-                })
-            }
+          })
+          .catch((erro) => {
+            alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
+          });
         }
-    }
+      }
 
 
     return (

@@ -17,13 +17,14 @@ export default function Menu(props) {
             <Nav className='me-auto'>
               <Navbar>Cadastramento</Navbar>
               <NavDropdown>
-                <NavDropdown.Item ><Link className='text-decoration'to={"/carros"}>Carros</Link></NavDropdown.Item>
-                <NavDropdown.Divider/>
                 <NavDropdown.Item><Link className='text-decoration' to={"/usuarios"}>Usuários</Link></NavDropdown.Item>
+                <NavDropdown.Divider/>
+                <NavDropdown.Item ><Link className='text-decoration'to={"/carros"}>Carros</Link></NavDropdown.Item>
               </NavDropdown>
-              <Navbar>Usuario: {usuario.nome}</Navbar>
-              <Nav.Link href='#' onClick={() => { setUsuario({ nome: '', logado: false }) }}>Logout</Nav.Link>
+              
             </Nav>
+            <Nav>Usuario: {usuario.nome}</Nav>
+            <Nav.Link href='#' onClick={() => { setUsuario({ nome: '', logado: false }) }}>Logout</Nav.Link>
           </Navbar.Collapse>
         </Container>
       </Navbar>

@@ -12,9 +12,9 @@ export default function TelaCadastroUsuarios(props) {
     const [modoEdicao, setModoEdicao] = useState(false);
 
     useEffect(() => {
-        fetch(urlBaseUsuarios,{method: "GET"})
+        fetch(urlBaseUsuarios,{method:"GET"})
         .then(resposta => resposta.json())
-        .then(usuarios => setListaDeUsuarios(usuarios));
+        .then(usuarios=> setListaDeUsuarios(usuarios));
     }, []);
 
 
@@ -23,11 +23,13 @@ export default function TelaCadastroUsuarios(props) {
             <div>
                 <Pagina>
                     <h1>Lista de Usuários</h1>
-                    <TabelaUsuarios listaDeUsuarios={listaDeUsuarios} 
-                    setExibirTabela={setExibirTabela}
-                    setListaDeUsuarios={setListaDeUsuarios}
-                    setUsuarioSelecionado={setUsuarioSelecionado}
-                    setModoEdicao={setModoEdicao}/>
+                    <TabelaUsuarios 
+                        listaDeUsuarios={listaDeUsuarios} 
+                        setExibirTabela={setExibirTabela}
+                        setListaDeUsuarios={setListaDeUsuarios}
+                        setUsuarioSelecionado={setUsuarioSelecionado}
+                        setModoEdicao={setModoEdicao}
+                    />
                 </Pagina>
             </div>   
         )
@@ -42,12 +44,13 @@ export default function TelaCadastroUsuarios(props) {
                         </span>
                     </h2>
                     <FormUsuarios 
-                    setExibirTabela={setExibirTabela}
-                    listaDeUsuarios={listaDeUsuarios}
-                    setListaDeUsuarios={setListaDeUsuarios}
-                    usuarioSelecionado={usuarioSelecionado}
-                    setModoEdicao={setModoEdicao}
-                    modoEdicao={modoEdicao}/>
+                        setExibirTabela={setExibirTabela}
+                        listaDeUsuarios={listaDeUsuarios}
+                        setListaDeUsuarios={setListaDeUsuarios}
+                        usuarioSelecionado={usuarioSelecionado}
+                        setModoEdicao={setModoEdicao}
+                        modoEdicao={modoEdicao}
+                    />
                 </Pagina>
             </div>
         )

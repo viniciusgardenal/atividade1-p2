@@ -3,26 +3,23 @@ import urlBaseUsuarios from "../utilitarios/config";
 export default function TabelaUsuarios(props) {
 
     function excluirUsuario(cpf) {
-        fetch(urlBaseUsuarios, {
+        fetch(`${urlBaseUsuarios}/${cpf}`, {
             method: 'DELETE',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({cpf:cpf}),
+            headers: {'Content-Type':'application/json'}
         })
-        .then(resposta => resposta.json())
-        .then((dados) => {
-            if (dados.status) {
+        .then((resposta) => {
+            if (resposta.ok) {
                 const novaLista = props.listaDeUsuarios.filter(usuario => usuario.cpf !== cpf) 
                 props.setListaDeUsuarios(novaLista);
-            }
-            else {
-                alert(dados.mensagem)
+            } else {
+                throw new Error('Não foi possível excluir o usuário.');
             }
         })
         .catch((erro) => {
             alert('Não foi possível conectar ao Backend. Erro:' + erro.message);
-        });    
-        
+        });
     }
+    
 
     function editarUsuario(usuario) {
         props.setUsuarioSelecionado(usuario);
@@ -37,10 +34,10 @@ export default function TabelaUsuarios(props) {
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>CPF</th>
                         <th>Nome</th>
                         <th>Sobrenome</th>
                         <th>Gênero</th>
-                        <th>CPF</th>
                         <th>Data de Nascimento</th>
                         <th>CEP</th>
                         <th>Cidade/Estado</th>
@@ -53,10 +50,10 @@ export default function TabelaUsuarios(props) {
                             return (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
+                                    <td>{usuario.cpf}</td>
                                     <td>{usuario.nome}</td>
                                     <td>{usuario.sobrenome}</td>
                                     <td>{usuario.genero}</td>
-                                    <td>{usuario.cpf}</td>
                                     <td>{usuario.dataNascimento}</td>
                                     <td>{usuario.cep}</td>
                                     <td>{usuario.cidade + "/" + usuario.estado}</td>

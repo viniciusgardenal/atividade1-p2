@@ -1,3 +1,3 @@
-const urlBaseUsuarios = "htpp://localhost:3200/usuarios";
+const urlBaseUsuarios = "http://localhost:3100/usuarios";
 
 export default urlBaseUsuarios;
